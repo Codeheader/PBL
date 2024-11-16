@@ -3,44 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>News Aggregator</title>
-    <!-- Link to CSS file -->
-    <link rel="stylesheet" href="styles.css">
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <title>News Aggregator App</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Navbar -->
-    <nav style="background: #333; color: white; padding: 10px;">
-        <img src="./images/logo.png" alt="Logo" style="height: 40px; vertical-align: middle;">
-        <span style="margin-left: 10px;">News Aggregator</span>
-    </nav>
+    <!-- Header Section -->
+    <header>
+        <h1>News Aggregator App</h1>
+        <p id="greeting-message">Welcome!</p>
+    </header>
 
-    <!-- Hero Section -->
-    <div style="background-image: url('./images/banner.jpg'); height: 300px; background-size: cover; text-align: center; color: white;">
-        <h1>Welcome to Our News Aggregator</h1>
-        <p>Your source for the latest updates</p>
-    </div>
+    <!-- Features Section -->
+    <section class="features">
+        <h2>Features</h2>
+        <ul>
+            <li>Aggregates news from multiple sources</li>
+            <li>User-friendly interface for easy navigation</li>
+            <li>Customizable topics and preferences</li>
+            <li>Curated articles based on trending keywords</li>
+        </ul>
+    </section>
 
-    <!-- News Cards -->
-    <div class="news-container" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin: 20px;">
-        <div class="news-item" style="border: 1px solid #ccc; padding: 10px;">
-            <img src="./images/article1.jpg" alt="News 1" style="width: 100%; height: auto;">
-            <h3>Headline 1</h3>
-            <p>Summary of the news article goes here.</p>
-            <a href="#">Read more</a>
+    <!-- Customizable Topics Section -->
+    <section class="topics">
+        <h2>Customizable Topics</h2>
+        <p>Select topics that interest you:</p>
+        <div class="topic-tags">
+            <button onclick="filterNews('technology')">Technology</button>
+            <button onclick="filterNews('sports')">Sports</button>
+            <button onclick="filterNews('health')">Health</button>
+            <button onclick="filterNews('entertainment')">Entertainment</button>
+            <button onclick="filterNews('all')">All</button>
         </div>
-        <div class="news-item" style="border: 1px solid #ccc; padding: 10px;">
-            <img src="./images/article2.jpg" alt="News 2" style="width: 100%; height: auto;">
-            <h3>Headline 2</h3>
-            <p>Summary of the news article goes here.</p>
-            <a href="#">Read more</a>
-        </div>
-    </div>
+    </section>
 
-    <!-- Footer -->
-    <footer style="background: #222; color: white; padding: 20px; text-align: center;">
-        <p>&copy; 2024 News Aggregator. All rights reserved.</p>
+    <!-- Sample News Feed Section -->
+    <section class="news-feed">
+        <h2>Sample News Feed</h2>
+        <div class="news-item" data-topic="technology">
+            <h3>Latest in Technology</h3>
+            <p>Stay updated with the latest advancements and trends in the tech world.</p>
+        </div>
+        <div class="news-item" data-topic="sports">
+            <h3>Sports Highlights</h3>
+            <p>Catch up on the biggest moments and latest updates in sports.</p>
+        </div>
+        <div class="news-item" data-topic="health">
+            <h3>Health Tips and Updates</h3>
+            <p>Get tips for a healthier lifestyle and stay informed on health trends.</p>
+        </div>
+        <div class="news-item" data-topic="entertainment">
+            <h3>Entertainment Buzz</h3>
+            <p>Discover the latest news in movies, music, and pop culture.</p>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer>
+        <p>&copy; 2024 News Aggregator App. All rights reserved.</p>
     </footer>
+
+    <!-- Link to JavaScript file -->
+    <script src="script.js"></script>
 </body>
 </html>
+
