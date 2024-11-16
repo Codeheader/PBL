@@ -1,32 +1,50 @@
-// Display a dynamic greeting based on the time of day
-function displayGreeting() {
-    const greetingElement = document.getElementById("greeting-message");
-    const hour = new Date().getHours();
+const apiKey = '0ed43ff017d14d6c928e400c2f6ca16e'; // Your API key
 
-    if (hour < 12) {
-        greetingElement.textContent = "Good Morning! Welcome to your personalized news app.";
-    } else if (hour < 18) {
-        greetingElement.textContent = "Good Afternoon! Catch up on the latest news.";
-    } else {
-        greetingElement.textContent = "Good Evening! Stay updated with the latest stories.";
+// Function to fetch news articles based on the category
+function fetchNews(category) {
+    let url = 'https://newsapi.org/v2/top-headlines?category=general&apiKey=' + apiKey;
+
+    // Modify URL for specific category
+    if (category !== 'all') {
+        url = `https://newsapi.org/v2/top-headlines?category=${category}&apiKey=${apiKey}`;
     }
+
+    // Fetch news from the API
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            if (data.articles && data.articles.length > 0) {
+                displayNews(data.articles);
+            } else {
+                document.getElementById('news-articles').innerHTML = '<p>No news available at the moment. Please try again later.</p>';
+            }
+        })
+        .catch(error => {
+            console.error('Error fetching news:', error);
+            document.getElementById('news-articles').innerHTML = '<p>Failed to load news. Please try again later.</p>';
+        });
 }
 
-// Filter news articles by topic
-function filterNews(topic) {
-    const newsItems = document.querySelectorAll(".news-item");
+// Function to display the fetched news articles
+function displayNews(articles) {
+    const newsContainer = document.getElementById('news-articles');
+    newsContainer.innerHTML = ''; // Clear previous articles
 
-    newsItems.forEach(item => {
-        if (item.getAttribute("data-topic") === topic || topic === "all") {
-            item.classList.remove("hidden");
-        } else {
-            item.classList.add("hidden");
-        }
+    articles.forEach(article => {
+        const articleElement = document.createElement('div');
+        articleElement.classList.add('news-article');
+        articleElement.innerHTML = `
+            <h3><a href="${article.url}" target="_blank">${article.title}</a></h3>
+            <p>${article.description}</p>
+        `;
+        newsContainer.appendChild(articleElement);
     });
 }
 
-// Initialize greeting and show all news items on page load
-document.addEventListener("DOMContentLoaded", () => {
-    displayGreeting();
-    filterNews("all");  // Display all news by default
-});
+// Fetch news for the 'all' category by default
+fetchNews('all');
+
+// Function to handle topic filter buttons
+function filterNews(category) {
+    fetchNews(category);
+}
